@@ -1,0 +1,19 @@
+.input-field{
+  /* width: 100% !important; */
+  min-width: 300px !important;
+  max-width: 600px !important;
+}
+
+.input_fields{
+  color: #000 !important;
+  /* background-color: #000 !important; */
+}
+
+.active{
+  color: #000 !important;
+}
+
+body{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
