@@ -16,19 +16,98 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
   recognition.lang = "en-US";
 
   // Speech recognition event handlers
+  // recognition.onresult = function (event) {
+  //   var transcript = event.results[0][0].transcript;
+  //   console.log("Transcript:", transcript);
+  //   // location.replace('../../welcome.html');
+  //   localStorage.setItem('spokenText', transcript);
+  //   if (transcript == "go to home page") {
+  //     if ("speechSynthesis" in window) {
+  //       var msg = new SpeechSynthesisUtterance();
+  //       msg.text = "Did you say?" + transcript +"Or would you like to repeat it?";
+  //       msg.rate = 1.0;
+  //       msg.pitch = 1.0;
+  //       window.speechSynthesis.speak(msg);
+  //     }
+  //     location.replace('../../welcome.html');
+  //   }
+  //   else if (transcript == "go to login page") {
+  //     if ("speechSynthesis" in window) {
+  //       var msg = new SpeechSynthesisUtterance();
+  //       msg.text = "Did you say?" + transcript +"Or would you like to repeat it?";
+  //       msg.rate = 1.0;
+  //       msg.pitch = 1.0;
+  //       window.speechSynthesis.speak(msg);
+  //     }
+  //     location.replace('../../login.html');
+  //   }
+  //   else if (transcript == "go to sign up page") {
+  //     if ("speechSynthesis" in window) {
+  //       var msg = new SpeechSynthesisUtterance();
+  //       msg.text = "Did you say?" + transcript +"Or would you like to repeat it?";
+  //       msg.rate = 1.0;
+  //       msg.pitch = 1.0;
+  //       window.speechSynthesis.speak(msg);
+  //     }
+  //     location.replace('../../signin.html');
+  //   }
+  //   else{
+  //     if ("speechSynthesis" in window) {
+  //       var msg = new SpeechSynthesisUtterance();
+  //       msg.text = "The service you requested is not available! please try again";
+  //       msg.rate = 1.0;
+  //       msg.pitch = 1.0;
+  //       window.speechSynthesis.speak(msg);
+  //     }
+  //     location.replace('../../welcome.html');
+  //   }
   recognition.onresult = function (event) {
     var transcript = event.results[0][0].transcript;
     console.log("Transcript:", transcript);
+    localStorage.setItem("spokenText", transcript);
+
+    switch (transcript) {
+      case "go to home page":
+        speakAndRedirect(
+          "Did you say? " + transcript + " Or would you like to repeat it?",
+          "../../welcome.html"
+        );
+        break;
+
+      case "go to login page":
+        speakAndRedirect(
+          "Did you say? " + transcript + " Or would you like to repeat it?",
+          "../../login.html"
+        );
+        break;
+
+      case "go to sign up page":
+        speakAndRedirect(
+          "Did you say? " + transcript + " Or would you like to repeat it?",
+          "../../signin.html"
+        );
+        break;
+
+      default:
+        speakAndRedirect(
+          "The service you requested is not available! Please try again",
+          "../../welcome.html"
+        );
+        break;
+    }
+  };
+
+  function speakAndRedirect(text, url) {
     if ("speechSynthesis" in window) {
       var msg = new SpeechSynthesisUtterance();
-      msg.text = "Did you say?" + transcript +"Or would you like to repeat it?";
+      msg.text = text;
       msg.rate = 1.0;
       msg.pitch = 1.0;
       window.speechSynthesis.speak(msg);
     }
-    location.replace('../../welcome.html');
-    localStorage.setItem('spokenText', transcript);
-  };
+    location.replace(url);
+  }
+
   recognition.onend = function () {
     console.log("Speech recognition ended.");
   };
