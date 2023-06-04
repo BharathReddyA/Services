@@ -23,11 +23,13 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assests/css/index.css">
-    <link rel="stylesheet" href="./assests/css/main.css">
+    <link rel="stylesheet" href="./assests/css/index.css" />
+    <link rel="stylesheet" href="./assests/css/main.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top custom-nav">
+    <nav
+      class="navbar navbar-expand-md bg-dark navbar-dark sticky-top custom-nav"
+    >
       <a class="navbar-brand" href="#">Navbar</a>
       <button
         class="navbar-toggler"
@@ -55,7 +57,26 @@
       </div>
     </nav>
     <div id="spokenText"></div>
-
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            <h1>Welcome, <%= user.name %>!</h1>
+            <div>
+              <p><strong>Name:</strong> <%= user.name %></p>
+              <p><strong>Username:</strong> <%= user.username %></p>
+              <p><strong>Phone:</strong> <%= user.phone %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">post a service</div>
+        <div class="col-lg-6">check the status of the service</div>
+      </div>
+    </div>
     <script>
       // Retrieve the spoken text from local storage
       var spokenText = localStorage.getItem("spokenText");
@@ -63,18 +84,20 @@
       // Display the spoken text
       var spokenTextElement = document.getElementById("spokenText");
       spokenTextElement.textContent = spokenText;
-    </script>
+      // // Access the query parameters from the URL
+      // const urlParams = new URLSearchParams(window.location.search);
+      // const name = urlParams.get("name");
+      // const username = urlParams.get("username");
+      // const phone = urlParams.get("phone");
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6">
-          post a service
-        </div>
-        <div class="col-lg-6">
-          check the status of the service
-        </div>
-      </div>
-    </div>
+      // // Update the HTML elements with the user information
+      // document.getElementById("name").textContent = name;
+      // document.getElementById("username").textContent = username;
+      // document.getElementById("phone").textContent = phone;
+    </script>
   </body>
+
   <script src="./assests/js/main.js"></script>
+  <!-- <script src="./server.js"></script>
+  <script src="../server.js"></script> -->
 </html>

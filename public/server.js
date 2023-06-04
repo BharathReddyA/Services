@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const mysql = require('mysql');
 const session = require('express-session');
 
@@ -7,6 +8,14 @@ const port = 3000;
 
 const crypto = require('crypto');
 const secretKey = crypto.randomBytes(32).toString('hex');
+
+// ...
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// ...
+
 
 const connection = mysql.createConnection({
   host: 'service-db.cwbicy2pepxf.us-east-1.rds.amazonaws.com',
@@ -63,13 +72,39 @@ app.post('/login', (req, res) => {
     if (results.length === 1) {
       req.session.loggedIn = true;
       req.session.username = username;
-      res.redirect('/welcome');
+      res.redirect('/welcome'); 
     } else {
       res.send('Invalid username or password');
     }
   });
 });
 
+// ...
+
+// app.get('/welcome', (req, res) => {
+//   if (req.session.loggedIn) {
+//     const username = req.session.username;
+//     const query = `SELECT * FROM users WHERE username = ?`;
+
+//     connection.query(query, [username], (err, results) => {
+//       if (err) throw err;
+//       const user = results[0];
+//       res.sendFile(__dirname + '/welcome.html?name=' + user.name + '&username=' + user.username + '&phone=' + user.phone);
+//     });
+//   } else {
+//     res.redirect('/login');
+//   }
+// });
+
+// app.get('/welcome', (req, res) => {
+//   const name = req.query.name;
+//   const username = req.query.username;
+//   const phone = req.query.phone;
+
+//   res.sendFile(path.join(__dirname, 'public', 'welcome.html'));
+// });
+
+// ...
 app.get('/welcome', (req, res) => {
   if (req.session.loggedIn) {
     const username = req.session.username;
@@ -78,31 +113,7 @@ app.get('/welcome', (req, res) => {
     connection.query(query, [username], (err, results) => {
       if (err) throw err;
       const user = results[0];
-      res.send(`
-        <html>
-          <head>
-            <title>Welcome</title>
-            <style>
-              .card {
-                background-color: #f0f0f0;
-                border-radius: 5px;
-                padding: 20px;
-                margin: 20px;
-                display: inline-block;
-              }
-            </style>
-          </head>
-          <body>
-            <h1>Welcome, ${user.name}!</h1>
-            <div class="card">
-              <h3>User Information</h3>
-              <p><strong>Name:</strong> ${user.name}</p>
-              <p><strong>Username:</strong> ${user.username}</p>
-              <p><strong>Phone:</strong> ${user.phone}</p>
-            </div>
-          </body>
-        </html>
-      `);
+      res.render('welcome', { user });
     });
   } else {
     res.redirect('/login');
