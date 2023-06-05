@@ -68,7 +68,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
 
     switch (transcript) {
       case "go to home page":
-        speakAndRedirect(transcript, "../../welcome.html");
+        speakAndRedirect(transcript, "../../home.html");
         break;
 
       case "go to login page":
@@ -83,7 +83,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         speakText(
           "The service you requested is not available! Please try again"
         );
-        redirectURL("../../welcome.html");
+        redirectURL("../../home.html");
         break;
     }
   };
