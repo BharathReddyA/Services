@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Display Spoken Text</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,12 +23,11 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="./assests/css/main.css" />
     <link rel="stylesheet" href="./assests/css/index.css" />
+    <link rel="stylesheet" href="./assests/css/main.css" />
   </head>
-  <body onoffline="offlineFunction()">
-    <!-- <nav
+  <body>
+    <nav
       class="navbar navbar-expand-md bg-dark navbar-dark sticky-top custom-nav"
     >
       <a class="navbar-brand" href="#">Navbar</a>
@@ -55,53 +55,35 @@
           </li>
         </ul>
       </div>
-    </nav> -->
-    <div class="container mt-5" id="introSection">
-      <div class="row mb-5">
-        <div class="col-lg-6">
-          <div class="brand-name">ServiGo</div>
-          <div class="brand-caption">All services you need in one click!</div>
-        </div>
-        <div class="col-lg-4 pt-5">
-          <div class="brand-caption">Any service you need! Just post some photos and price of what needs to be done and voila! choose the person who wants to complete your task.</div>
-        </div>
-      </div>
-      <div class="row pt-5">
-        <div class="col-lg-4">
-          <section id="voice-section">
-            <button class="mic-icon-style"><span class="material-icons" id="speechToTextBtn"
-              >mic</span
-            ></button>
-            <div class="brand-caption mt-5 ml-5">
-              Voice search for your service
-            </div>
-          </section>
-        </div>
-        <div class="col-lg-4">
-          <div class="card search-section">
-            <div class="search-bar p-2">
-              <form action="/welcome" method="post" class="search-form">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  id="search"
-                  name="work-type"
-                  required
-                />
-                <button type="submit" class="search-btn">
-                  <span class="material-icons search-icon-style">search</span>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <form action="/home-page" method="get" class="">
-            <button type="submit" class="home-page-btn p-3">home page</button>
-          </form>
-        </div>
+    </nav>
+    <div id="spokenText"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">post a service</div>
+        <div class="col-lg-6">check the status of the service</div>
       </div>
     </div>
+    <script>
+      // Retrieve the spoken text from local storage
+      var spokenText = localStorage.getItem("spokenText");
+
+      // Display the spoken text
+      var spokenTextElement = document.getElementById("spokenText");
+      spokenTextElement.textContent = spokenText;
+      // // Access the query parameters from the URL
+      // const urlParams = new URLSearchParams(window.location.search);
+      // const name = urlParams.get("name");
+      // const username = urlParams.get("username");
+      // const phone = urlParams.get("phone");
+
+      // // Update the HTML elements with the user information
+      // document.getElementById("name").textContent = name;
+      // document.getElementById("username").textContent = username;
+      // document.getElementById("phone").textContent = phone;
+    </script>
   </body>
+
   <script src="./assests/js/main.js"></script>
+  <!-- <script src="./server.js"></script>
+  <script src="../server.js"></script> -->
 </html>

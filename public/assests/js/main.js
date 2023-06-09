@@ -83,7 +83,7 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
         speakText(
           "The service you requested is not available! Please try again"
         );
-        redirectURL("../../home.html");
+        redirectURL("../../home");
         break;
     }
   };
@@ -108,6 +108,10 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
     speakText(message);
     redirectURL(url);
   }
+
+  // function navigatePageTo(){
+  //   window.location.href ='../../home'
+  // }
 
   recognition.onend = function () {
     console.log("Speech recognition ended.");

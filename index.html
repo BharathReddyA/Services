@@ -26,27 +26,70 @@
     <link rel="stylesheet" href="./assests/css/main.css" />
     <link rel="stylesheet" href="./assests/css/index.css" />
   </head>
-  <body style="background-color: #007C7C;" onoffline="offlineFunction()"> 
-    <section id="introSection">
-      <span class="material-icons mic-icon-style" id="speechToTextBtn">mic</span>
-      </div>
-    </section>
-    <section>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="card">
-              <a href="./home.html">Welcome page</a>
+  <body onoffline="offlineFunction()"> 
+    <nav
+    class="navbar navbar-expand-md bg-dark navbar-dark sticky-top custom-nav"
+  >
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#collapsibleNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse flex-row-reverse"
+      id="collapsibleNavbar"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="./">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./signin.html">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./login.html">Link</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+    <div class="container py-5 mt-5" id="introSection">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="brand-name">
+            ServiGo
+          </div>
+          <div class="brand-caption">
+            All services you need in one click!
+          </div>
+          <section id="voice-section">
+            <span class="material-icons mic-icon-style" id="speechToTextBtn">mic</span>
+          </section>
+        </div>
+        <div class="col-lg-6">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="search-bar">
+                  <form action="/welcome" method="post">
+                    <input type="text" placeholder="Search" id="search" name="work-type" required>
+                    <button type="submit">search</button>
+                  </form>
+                </div>
+                <div class="card">
+                  <form action="/home-page" method="get">
+                    <button type="submit" >home page</button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- <div class="p-3" style="border: 1px solid gray; height: 300px; border-radius: 8px;">
-      <span id="final" class="text-light"></span>
-      <span id="interim" class="text-secondary"></span>
-    </div> -->
-    <!-- <button id="textToSpeechBtn">Text to Speech</button> -->
+    </div>
   </body>
   <script src="./assests/js/main.js"></script>
 </html>
