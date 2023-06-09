@@ -13,6 +13,7 @@ const secretKey = crypto.randomBytes(32).toString("hex");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ...
 
@@ -78,6 +79,10 @@ app.use(express.static("public"));
 //   }
 // });
 
+app.get('/home-page', (req,res) => {
+  res.render('home');
+})
+
 app.get("/signin", (req, res) => {
   res.sendFile(__dirname + "/signin.html");
 });
@@ -96,6 +101,27 @@ app.post("/signin", (req, res) => {
     res.redirect("/login");
   });
 });
+
+// ...
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.render('welcome', { user: req.user || null });
+});
+
+app.post('/welcome', (req, res) => {
+  const workType = req.body['work-type'];
+  const query = 'SELECT * FROM workers WHERE work_type = ?';
+
+  connection.query(query, [workType], (err, results) => {
+    if (err) throw err;
+    const worker = results[0];
+    res.render('welcome', { worker:worker });
+  });
+});
+
+// ...
+
 
 app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/login.html");
@@ -119,32 +145,6 @@ app.post("/login", (req, res) => {
   });
 });
 
-// ...
-
-// app.get('/welcome', (req, res) => {
-//   if (req.session.loggedIn) {
-//     const username = req.session.username;
-//     const query = `SELECT * FROM users WHERE username = ?`;
-
-//     connection.query(query, [username], (err, results) => {
-//       if (err) throw err;
-//       const user = results[0];
-//       res.sendFile(__dirname + '/welcome.html?name=' + user.name + '&username=' + user.username + '&phone=' + user.phone);
-//     });
-//   } else {
-//     res.redirect('/login');
-//   }
-// });
-
-// app.get('/welcome', (req, res) => {
-//   const name = req.query.name;
-//   const username = req.query.username;
-//   const phone = req.query.phone;
-
-//   res.sendFile(path.join(__dirname, 'public', 'welcome.html'));
-// });
-
-// ...
 app.get("/welcome", (req, res) => {
   if (req.session.loggedIn) {
     const username = req.session.username;
@@ -153,22 +153,10 @@ app.get("/welcome", (req, res) => {
     connection.query(query, [username], (err, results) => {
       if (err) throw err;
       const user = results[0];
-      res.render("welcome", { user });
+      res.render("welcome", { user:user });
     });
   } else {
-    const html = `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Welcome!</title>
-      </head>
-      <body>
-        <h1>Welcome to ServiGo App!</h1>
-        <p>Login to access services</p>
-      </body>
-    </html>
-  `;
-    res.send(html);
+    res.redirect('/login');
   }
 });
 

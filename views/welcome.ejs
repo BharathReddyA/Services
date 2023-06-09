@@ -61,12 +61,28 @@
       <div class="row">
         <div class="col-lg-6">
           <div class="card">
+            <% if (typeof user !== 'undefined' && user !== null){ %>
             <h1>Welcome, <%= user.name %>!</h1>
             <div>
               <p><strong>Name:</strong> <%= user.name %></p>
               <p><strong>Username:</strong> <%= user.username %></p>
               <p><strong>Phone:</strong> <%= user.phone %></p>
             </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <div class="container-fluid" id="search-results">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            
+              <h1>Welcome, <%= worker.name %>!</h1>
+              <div>
+                <p><strong>Name:</strong> <%= worker.name %></p>
+                <p><strong>Username:</strong> <%= worker.work_type %></p>
+                <!-- Additional user information -->
+              </div>
           </div>
         </div>
       </div>
